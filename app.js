@@ -1,24 +1,21 @@
-const firebase = require('firebase');
-const session = require('express-session');
+
+
+// const firebase = require('firebase');
+// const session = require('express-session');
+
 
 const express = require('express'); 
 const app = express();
 
-const port = 3000;
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCei96vhRkctnUu-NFTYKayQY6BN1Y0PPk",
-    authDomain: "loja-massa.firebaseapp.com",
-    databaseURL: "https://loja-massa-default-rtdb.firebaseio.com",
-    projectId: "loja-massa",
-    storageBucket: "loja-massa.appspot.com",
-    messagingSenderId: "941862311766",
-    appId: "1:941862311766:web:cf936aed24aa9d7277a8f7",
-    measurementId: "G-95J01MW8YH"
-  };
+const port = 3000; //Escolha um valor que esteja entre 1025 e 65535
 
- firebase.initializeApp(firebaseConfig);
- const db = firebase.firestore();
+// // Configuração do Firebase
+// const firebaseConfig = {
+//     // Insira suas credenciais do Firebase aqui
+// };
+// firebase.initializeApp(firebaseConfig);
+// const db = firebase.firestore();
 
 // Configurações do Express
 app.set('view engine', 'pug');
@@ -28,11 +25,13 @@ app.set('views', './views');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
- app.use(session({
-     secret: 'sua_chave_secreta',
-     resave: false,
-     saveUninitialized: true
-}));
+// app.use(session({
+//     secret: 'sua_chave_secreta',
+//     resave: false,
+//     saveUninitialized: true
+// }));
+
+
 
 // Rota principal
 app.get('/',(req,res)=>{
@@ -70,6 +69,7 @@ app.get('/produtos', (req, res) => {
     res.render('produtos');
 });
 
+
 // Rota para o formulário de cadastro de produtos
 app.get('/cadastro-produtos', (req, res) => {
     res.render('cadastro');
@@ -97,6 +97,8 @@ app.post('/cadastro-produtos', (req, res) => {
             res.render('cadastro', { error: error.message });
         });
 });
+
+
 
 // Rota para logout
 app.get('/logout', (req, res) => {
